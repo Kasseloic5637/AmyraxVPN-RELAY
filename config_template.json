@@ -1,0 +1,5754 @@
+{
+  "dns": {
+    "hosts": {
+      "domain:googleapis.cn": "googleapis.com",
+      "dns.alidns.com": [
+        "223.5.5.5",
+        "223.6.6.6",
+        "2400:3200::1",
+        "2400:3200:baba::1"
+      ],
+      "one.one.one.one": [
+        "1.1.1.1",
+        "1.0.0.1",
+        "2606:4700:4700::1111",
+        "2606:4700:4700::1001"
+      ],
+      "dns.cloudflare.com": [
+        "104.16.132.229",
+        "104.16.133.229",
+        "2606:4700::6810:84e5",
+        "2606:4700::6810:85e5"
+      ],
+      "cloudflare-dns.com": [
+        "104.16.248.249",
+        "104.16.249.249",
+        "2606:4700::6810:f8f9",
+        "2606:4700::6810:f9f9"
+      ],
+      "dot.pub": [
+        "1.12.12.12",
+        "120.53.53.53"
+      ],
+      "dns.google": [
+        "8.8.8.8",
+        "8.8.4.4",
+        "2001:4860:4860::8888",
+        "2001:4860:4860::8844"
+      ],
+      "dns.quad9.net": [
+        "9.9.9.9",
+        "149.112.112.112",
+        "2620:fe::fe",
+        "2620:fe::9"
+      ],
+      "common.dot.dns.yandex.net": [
+        "77.88.8.8",
+        "77.88.8.1",
+        "2a02:6b8::feed:0ff",
+        "2a02:6b8:0:1::feed:0ff"
+      ]
+    },
+    "servers": [
+      "1.1.1.1",
+      {
+        "address": "1.1.1.1",
+        "domains": [
+          "geosite:google"
+        ]
+      },
+      {
+        "address": "223.5.5.5",
+        "domains": [
+          "geosite:private",
+          "domain:alidns.com",
+          "domain:doh.pub",
+          "domain:dot.pub",
+          "domain:360.cn",
+          "domain:onedns.net"
+        ],
+        "skipFallback": true,
+        "tag": "domestic-dns0"
+      },
+      {
+        "address": "223.5.5.5",
+        "domains": [
+          "geosite:cn"
+        ],
+        "expectIPs": [
+          "geoip:cn"
+        ],
+        "skipFallback": true,
+        "tag": "domestic-dns0_cn_expect"
+      }
+    ],
+    "tag": "dns-module"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "userLevel": 8
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "enabled": true,
+        "routeOnly": false
+      },
+      "tag": "socks"
+    }
+  ],
+  "log": {
+    "loglevel": "warning"
+  },
+  "observatory": {
+    "enableConcurrency": true,
+    "probeInterval": "3m",
+    "probeUrl": "https://www.gstatic.com/generate_204",
+    "subjectSelector": [
+      "proxy-",
+      "CF-",
+      "IP-"
+    ]
+  },
+  "outbounds": [
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-1"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-2"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-3"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-4"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-5"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-6"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-7"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-8"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-9"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-10"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-11"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-12"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-13"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-14"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-15"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-16"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-17"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-18"
+    },
+    {
+      "mux": {
+        "concurrency": -1,
+        "enabled": false
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "XXXXXXXXXXX",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "104.198.14.52",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        }
+      },
+      "tag": "AmyraxVPN-19"
+    },
+    {
+      "tag": "CF-001",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.5.83",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-002",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.2",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-003",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.3",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-004",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.4",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-005",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.5",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-006",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "75.2.60.5",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-007",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "144.76.1.88",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-008",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.33.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-009",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.0",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-010",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.0",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-011",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-012",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.38",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-013",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.45",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-014",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.77",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-015",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.33.186.135",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-016",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "63.176.8.218",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-017",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "85.10.207.48",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-018",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "94.130.33.41",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-019",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "95.216.69.37",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-020",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-021",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.63.202",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-022",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "15.197.167.90",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-023",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.150.14",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-024",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "204.12.196.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-025",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "35.157.26.135",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-026",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.38",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-027",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.99",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-028",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "54.232.119.62",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-029",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "65.109.34.234",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-030",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "94.130.70.160",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-031",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "138.201.54.122",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-032",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "142.54.178.211",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-033",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.158.128",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-034",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "184.171.110.10",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-035",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.108",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-036",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.124",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "CF-037",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "63.141.252.203",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "104.198.14.52",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-001",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.5.83",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-002",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.2",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-003",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.3",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cluster-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-004",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.4",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "gateway-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-005",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "50.7.87.5",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "krew.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-006",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "75.2.60.5",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kubernetes.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-007",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "144.76.1.88",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "vuejs.org",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-008",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.33.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-009",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.0",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-010",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.0",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cluster-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-011",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "gateway-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-012",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.38",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "krew.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-013",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.45",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kubernetes.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-014",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.162.247.77",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "vuejs.org",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-015",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.33.186.135",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-016",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "63.176.8.218",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-017",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "85.10.207.48",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cluster-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-018",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "94.130.33.41",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "gateway-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-019",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "95.216.69.37",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "krew.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-020",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.198.14.52",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kubernetes.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-021",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.63.202",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "vuejs.org",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-022",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "15.197.167.90",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-023",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.150.14",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-024",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "204.12.196.34",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cluster-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-025",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "35.157.26.135",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "gateway-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-026",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.38",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "krew.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-027",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.99",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kubernetes.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-028",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "54.232.119.62",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "vuejs.org",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-029",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "65.109.34.234",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-030",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "94.130.70.160",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-031",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "138.201.54.122",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cluster-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-032",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "142.54.178.211",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "gateway-api.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-033",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.158.128",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "krew.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-034",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "184.171.110.10",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kubernetes.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-035",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.108",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "vuejs.org",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-036",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "52.222.214.124",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "jobset.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "IP-037",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "63.141.252.203",
+            "port": 443,
+            "users": [
+              {
+                "id": "XXXXXXXXXXX",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "kind.sigs.k8s.io",
+          "allowInsecure": true,
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "fingerprint": "chrome"
+        },
+        "xhttpSettings": {
+          "host": "XXXXXXXXXXX",
+          "path": "XXXXXXXXXXX",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "16000000",
+            "headers": {
+              "x-host": "XXXXXXXXXXX"
+            },
+            "xPaddingKey": "XXXXXXXXXXX",
+            "xPaddingHeader": "XXXXXXXXXXX",
+            "scMaxConcurrentPosts": 1024,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 16777216
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAliveInterval": 1,
+          "tcpKeepAliveIdle": 180
+        }
+      },
+      "mux": {
+        "enabled": false
+      }
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ],
+  "remarks": "@AmyraxVPN",
+  "routing": {
+    "balancers": [
+      {
+        "selector": [
+          "proxy-",
+          "CF-",
+          "IP-"
+        ],
+        "strategy": {
+          "type": "leastPing"
+        },
+        "tag": "proxy-round"
+      }
+    ],
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "network": "udp",
+        "outboundTag": "block",
+        "port": "443",
+        "type": "field"
+      },
+      {
+        "balancerTag": "proxy-round",
+        "domain": [
+          "geosite:google"
+        ],
+        "type": "field"
+      },
+      {
+        "ip": [
+          "ext:geoip-only-cn-private.dat:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "223.5.5.5",
+          "223.6.6.6",
+          "2400:3200::1",
+          "2400:3200:baba::1",
+          "119.29.29.29",
+          "1.12.12.12",
+          "120.53.53.53",
+          "2402:4e00::",
+          "2402:4e00:1::",
+          "180.76.76.76",
+          "2400:da00::6666",
+          "114.114.114.114",
+          "114.114.115.115",
+          "114.114.114.119",
+          "114.114.115.119",
+          "114.114.114.110",
+          "114.114.115.110",
+          "180.184.1.1",
+          "180.184.2.2",
+          "101.226.4.6",
+          "218.30.118.6",
+          "123.125.81.6",
+          "140.207.198.6",
+          "1.2.4.8",
+          "210.2.4.8",
+          "52.80.66.66",
+          "117.50.22.22",
+          "2400:7fc0:849e:200::4",
+          "2404:c2c0:85d8:901::4",
+          "117.50.10.10",
+          "52.80.52.52",
+          "2400:7fc0:849e:200::8",
+          "2404:c2c0:85d8:901::8",
+          "117.50.60.30",
+          "52.80.60.30"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "domain:alidns.com",
+          "domain:doh.pub",
+          "domain:dot.pub",
+          "domain:360.cn",
+          "domain:onedns.net"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "ext:geoip-only-cn-private.dat:cn"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:cn"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "domestic-dns0",
+          "domestic-dns0_cn_expect"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "balancerTag": "proxy-round",
+        "inboundTag": [
+          "dns-module"
+        ],
+        "type": "field"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "domain:helm.sh",
+          "domain:keda.sh",
+          "domain:rook.io",
+          "domain:istio.io",
+          "domain:cilium.io",
+          "domain:vuejs.org",
+          "domain:nuxt.com",
+          "domain:vitejs.dev",
+          "domain:smashingmagazine.com",
+          "domain:pnpm.io",
+          "domain:fluxcd.io",
+          "domain:harbor.io",
+          "domain:calico.org",
+          "domain:linkerd.io",
+          "domain:openebs.io",
+          "domain:tekton.dev",
+          "domain:longhorn.io",
+          "domain:crossplane.io",
+          "domain:kubernetes.io",
+          "domain:kubebuilder.io",
+          "domain:cert-manager.io",
+          "domain:letsencrypt.org",
+          "domain:sigs.k8s.io",
+          "domain:operatorframework.io",
+          "domain:readthedocs.io"
+        ],
+        "balancerTag": "proxy-round"
+      },
+      {
+        "type": "field",
+        "ip": [
+          "50.7.87.2",
+          "50.7.87.3",
+          "50.7.87.4",
+          "50.7.87.5",
+          "75.2.60.5",
+          "144.76.1.88",
+          "104.21.33.34",
+          "188.114.98.0",
+          "188.114.99.0",
+          "3.162.247.34",
+          "3.162.247.38",
+          "3.162.247.45",
+          "3.162.247.77",
+          "3.33.186.135",
+          "63.176.8.218",
+          "85.10.207.48",
+          "94.130.33.41",
+          "95.216.69.37",
+          "104.21.63.202",
+          "15.197.167.90",
+          "172.67.150.14",
+          "204.12.196.34",
+          "35.157.26.135",
+          "52.222.214.38",
+          "52.222.214.99",
+          "54.232.119.62",
+          "65.109.34.234",
+          "94.130.70.160",
+          "138.201.54.122",
+          "142.54.178.211",
+          "172.67.158.128",
+          "184.171.110.10",
+          "52.222.214.108",
+          "52.222.214.124",
+          "63.141.252.203"
+        ],
+        "balancerTag": "proxy-round"
+      },
+      {
+        "balancerTag": "proxy-round",
+        "network": "tcp,udp",
+        "type": "field"
+      }
+    ]
+  }
+}
