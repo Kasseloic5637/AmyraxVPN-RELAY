@@ -277,7 +277,6 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
     </div>
   </header>
 
-  <!-- ══ SERVER MODE ══ -->
   <div class="card">
     <div class="sec-lbl">
       <div class="ico">🖥️</div>
@@ -326,27 +325,16 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
       </div>
     </div>
 
-    <!-- HOST / SNI -->
-    <div class="port-row" style="margin-top:8px;">
-      <div class="field" id="host-field" style="margin-bottom:0">
-        <label>🌐 دامنه نتلیفای شما <span class="badge req">REQUIRED</span></label>
-        <div class="ishell"><input type="text" id="cfgHost" placeholder="your-app.netlify.app" dir="ltr"></div>
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <label>🔌 پورت اتصال</label>
-        <div class="ishell">
-          <input type="number" id="cfgPort" value="443" min="1" max="65535" dir="ltr" style="font-family:'JetBrains Mono',monospace;font-size:13px;">
-        </div>
-      </div>
+    <div class="field" id="host-field" style="margin-top:8px;margin-bottom:0">
+      <label>🌐 دامنه نتلیفای شما <span class="badge req">REQUIRED</span></label>
+      <div class="ishell"><input type="text" id="cfgHost" placeholder="your-app.netlify.app" dir="ltr"></div>
     </div>
 
-    <!-- CONFIG NAME -->
     <div class="field" style="margin-top:16px;">
       <label>✏️ نام کانفیگ</label>
       <div class="ishell"><input type="text" id="cfgName" placeholder="مثال: MyConfig"></div>
     </div>
 
-    <!-- ══ MULTI UUID TOGGLE ══ -->
     <div class="toggle-row" id="multiToggle" onclick="toggleMulti()">
       <div class="toggle-ico">🔑</div>
       <div class="toggle-label">
@@ -356,7 +344,6 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
       <div class="toggle-track" id="multiTrack"></div>
     </div>
 
-    <!-- ══ UUID LIST ══ -->
     <div id="uuid-section">
       <div class="uuid-list-header">
         <div class="lh-left">
@@ -376,7 +363,6 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
         </div>
       </div>
       <div class="uuid-entries" id="uuidEntries"></div>
-      <!-- per-domain toggle -->
       <div class="inner-toggle" id="perDomainToggle" onclick="togglePerDomain()" style="margin-top:12px;">
         <span style="font-size:16px;">🌐</span>
         <div style="flex:1">
@@ -391,13 +377,11 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
       </div>
     </div>
 
-    <!-- SINGLE UUID (default for donated / used when multi-uuid OFF) -->
     <div class="field" id="singleUuidField" style="margin-top:16px;display:none;">
       <label>🔑 UUID <span class="badge req">REQUIRED</span></label>
       <div class="ishell"><input type="text" id="cfgUuid" placeholder="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" dir="ltr" style="font-family:'JetBrains Mono',monospace;font-size:11px;"></div>
     </div>
 
-    <!-- GENERATE -->
     <div class="gen-wrap">
       <div class="gen-glow"></div>
       <button class="gen-btn" id="genBtn" onclick="generate()">
@@ -413,7 +397,6 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
     </div>
   </div>
 
-  <!-- ══ RESULTS ══ -->
   <div id="results">
     <div class="results-header-row">
       <span class="results-title">📦 نتایج ساخت کانفیگ</span>
@@ -430,9 +413,1082 @@ footer{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.
 <div id="ns"></div>
 
 <script>
-/* ══ EMBEDDED CONFIG TEMPLATE ══ */
-const CONFIG_TEMPLATE_STR = `{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dns.cloudflare.com":["104.16.132.229","104.16.133.229","2606:4700::6810:84e5","2606:4700::6810:85e5"],"cloudflare-dns.com":["104.16.248.249","104.16.249.249","2606:4700::6810:f8f9","2606:4700::6810:f9f9"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]},"servers":["1.1.1.1",{"address":"1.1.1.1","domains":["geosite:google"]},{"address":"223.5.5.5","domains":["geosite:private","domain:alidns.com","domain:doh.pub","domain:dot.pub","domain:360.cn","domain:onedns.net"],"skipFallback":true,"tag":"domestic-dns0"},{"address":"223.5.5.5","domains":["geosite:cn"],"expectIPs":["geoip:cn"],"skipFallback":true,"tag":"domestic-dns0_cn_expect"}],"tag":"dns-module"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":false},"tag":"socks"}],"log":{"loglevel":"warning"},"observatory":{"enableConcurrency":true,"probeInterval":"3m","probeUrl":"https://www.gstatic.com/generate_204","subjectSelector":["proxy-","CF-","IP-"]},"outbounds":[{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-1"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-2"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-3"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-4"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-5"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-6"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-7"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-8"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-9"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-10"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-11"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-12"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-13"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-14"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-15"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-16"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-17"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-18"},{"mux":{"concurrency":-1,"enabled":false},"protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"encryption":"none","id":"XXXXXXXXXXX","level":8}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome","serverName":"104.198.14.52","show":false},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}}},"tag":"AmyraxVPN-19"},{"tag":"CF-001","protocol":"vless","settings":{"vnext":[{"address":"50.7.5.83","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-002","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.2","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-003","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.3","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-004","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.4","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-005","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.5","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-006","protocol":"vless","settings":{"vnext":[{"address":"75.2.60.5","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-007","protocol":"vless","settings":{"vnext":[{"address":"144.76.1.88","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-008","protocol":"vless","settings":{"vnext":[{"address":"104.21.33.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-009","protocol":"vless","settings":{"vnext":[{"address":"188.114.98.0","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-010","protocol":"vless","settings":{"vnext":[{"address":"188.114.99.0","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-011","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-012","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.38","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-013","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.45","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-014","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.77","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-015","protocol":"vless","settings":{"vnext":[{"address":"3.33.186.135","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-016","protocol":"vless","settings":{"vnext":[{"address":"63.176.8.218","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-017","protocol":"vless","settings":{"vnext":[{"address":"85.10.207.48","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-018","protocol":"vless","settings":{"vnext":[{"address":"94.130.33.41","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-019","protocol":"vless","settings":{"vnext":[{"address":"95.216.69.37","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-020","protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-021","protocol":"vless","settings":{"vnext":[{"address":"104.21.63.202","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-022","protocol":"vless","settings":{"vnext":[{"address":"15.197.167.90","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-023","protocol":"vless","settings":{"vnext":[{"address":"172.67.150.14","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-024","protocol":"vless","settings":{"vnext":[{"address":"204.12.196.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-025","protocol":"vless","settings":{"vnext":[{"address":"35.157.26.135","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-026","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.38","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-027","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.99","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-028","protocol":"vless","settings":{"vnext":[{"address":"54.232.119.62","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-029","protocol":"vless","settings":{"vnext":[{"address":"65.109.34.234","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-030","protocol":"vless","settings":{"vnext":[{"address":"94.130.70.160","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-031","protocol":"vless","settings":{"vnext":[{"address":"138.201.54.122","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-032","protocol":"vless","settings":{"vnext":[{"address":"142.54.178.211","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-033","protocol":"vless","settings":{"vnext":[{"address":"172.67.158.128","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-034","protocol":"vless","settings":{"vnext":[{"address":"184.171.110.10","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-035","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.108","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-036","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.124","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"CF-037","protocol":"vless","settings":{"vnext":[{"address":"63.141.252.203","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"104.198.14.52","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-001","protocol":"vless","settings":{"vnext":[{"address":"50.7.5.83","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-002","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.2","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-003","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.3","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"cluster-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-004","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.4","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"gateway-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-005","protocol":"vless","settings":{"vnext":[{"address":"50.7.87.5","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"krew.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-006","protocol":"vless","settings":{"vnext":[{"address":"75.2.60.5","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kubernetes.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-007","protocol":"vless","settings":{"vnext":[{"address":"144.76.1.88","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"vuejs.org","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-008","protocol":"vless","settings":{"vnext":[{"address":"104.21.33.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-009","protocol":"vless","settings":{"vnext":[{"address":"188.114.98.0","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-010","protocol":"vless","settings":{"vnext":[{"address":"188.114.99.0","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"cluster-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-011","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"gateway-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-012","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.38","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"krew.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-013","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.45","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kubernetes.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-014","protocol":"vless","settings":{"vnext":[{"address":"3.162.247.77","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"vuejs.org","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-015","protocol":"vless","settings":{"vnext":[{"address":"3.33.186.135","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-016","protocol":"vless","settings":{"vnext":[{"address":"63.176.8.218","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-017","protocol":"vless","settings":{"vnext":[{"address":"85.10.207.48","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"cluster-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-018","protocol":"vless","settings":{"vnext":[{"address":"94.130.33.41","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"gateway-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-019","protocol":"vless","settings":{"vnext":[{"address":"95.216.69.37","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"krew.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-020","protocol":"vless","settings":{"vnext":[{"address":"104.198.14.52","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kubernetes.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-021","protocol":"vless","settings":{"vnext":[{"address":"104.21.63.202","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"vuejs.org","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-022","protocol":"vless","settings":{"vnext":[{"address":"15.197.167.90","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-023","protocol":"vless","settings":{"vnext":[{"address":"172.67.150.14","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-024","protocol":"vless","settings":{"vnext":[{"address":"204.12.196.34","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"cluster-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-025","protocol":"vless","settings":{"vnext":[{"address":"35.157.26.135","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"gateway-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-026","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.38","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"krew.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-027","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.99","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kubernetes.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-028","protocol":"vless","settings":{"vnext":[{"address":"54.232.119.62","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"vuejs.org","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-029","protocol":"vless","settings":{"vnext":[{"address":"65.109.34.234","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-030","protocol":"vless","settings":{"vnext":[{"address":"94.130.70.160","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-031","protocol":"vless","settings":{"vnext":[{"address":"138.201.54.122","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"cluster-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-032","protocol":"vless","settings":{"vnext":[{"address":"142.54.178.211","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"gateway-api.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-033","protocol":"vless","settings":{"vnext":[{"address":"172.67.158.128","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"krew.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-034","protocol":"vless","settings":{"vnext":[{"address":"184.171.110.10","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kubernetes.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-035","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.108","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"vuejs.org","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-036","protocol":"vless","settings":{"vnext":[{"address":"52.222.214.124","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"jobset.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"tag":"IP-037","protocol":"vless","settings":{"vnext":[{"address":"63.141.252.203","port":443,"users":[{"id":"XXXXXXXXXXX","encryption":"none","flow":""}]}]},"streamSettings":{"network":"xhttp","security":"tls","tlsSettings":{"serverName":"kind.sigs.k8s.io","allowInsecure":true,"alpn":["h2","http/1.1"],"fingerprint":"chrome"},"xhttpSettings":{"host":"XXXXXXXXXXX","path":"XXXXXXXXXXX","mode":"auto","extra":{"xPaddingBytes":"1-1","xPaddingObfsMode":true,"scMaxEachPostBytes":"16000000","headers":{"x-host":"XXXXXXXXXXX"},"xPaddingKey":"XXXXXXXXXXX","xPaddingHeader":"XXXXXXXXXXX","scMaxConcurrentPosts":1024,"scMinPostsIntervalMs":0,"scStreamReceiveWindow":16777216}},"sockopt":{"tcpFastOpen":true,"tcpNoDelay":true,"tcpKeepAliveInterval":1,"tcpKeepAliveIdle":180}},"mux":{"enabled":false}},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"remarks":"@AmyraxVPN","routing":{"balancers":[{"selector":["proxy-","CF-","IP-"],"strategy":{"type":"leastPing"},"tag":"proxy-round"}],"domainStrategy":"AsIs","rules":[{"network":"udp","outboundTag":"block","port":"443","type":"field"},{"balancerTag":"proxy-round","domain":["geosite:google"],"type":"field"},{"ip":["ext:geoip-only-cn-private.dat:private"],"outboundTag":"direct","type":"field"},{"domain":["geosite:private"],"outboundTag":"direct","type":"field"},{"ip":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1","119.29.29.29","1.12.12.12","120.53.53.53","2402:4e00::","2402:4e00:1::","180.76.76.76","2400:da00::6666","114.114.114.114","114.114.115.115","114.114.114.119","114.114.115.119","114.114.114.110","114.114.115.110","180.184.1.1","180.184.2.2","101.226.4.6","218.30.118.6","123.125.81.6","140.207.198.6","1.2.4.8","210.2.4.8","52.80.66.66","117.50.22.22","2400:7fc0:849e:200::4","2404:c2c0:85d8:901::4","117.50.10.10","52.80.52.52","2400:7fc0:849e:200::8","2404:c2c0:85d8:901::8","117.50.60.30","52.80.60.30"],"outboundTag":"direct","type":"field"},{"domain":["domain:alidns.com","domain:doh.pub","domain:dot.pub","domain:360.cn","domain:onedns.net"],"outboundTag":"direct","type":"field"},{"ip":["ext:geoip-only-cn-private.dat:cn"],"outboundTag":"direct","type":"field"},{"domain":["geosite:cn"],"outboundTag":"direct","type":"field"},{"inboundTag":["domestic-dns0","domestic-dns0_cn_expect"],"outboundTag":"direct","type":"field"},{"balancerTag":"proxy-round","inboundTag":["dns-module"],"type":"field"},{"type":"field","domain":["domain:helm.sh","domain:keda.sh","domain:rook.io","domain:istio.io","domain:cilium.io","domain:vuejs.org","domain:nuxt.com","domain:vitejs.dev","domain:smashingmagazine.com","domain:pnpm.io","domain:fluxcd.io","domain:harbor.io","domain:calico.org","domain:linkerd.io","domain:openebs.io","domain:tekton.dev","domain:longhorn.io","domain:crossplane.io","domain:kubernetes.io","domain:kubebuilder.io","domain:cert-manager.io","domain:letsencrypt.org","domain:sigs.k8s.io","domain:operatorframework.io","domain:readthedocs.io"],"balancerTag":"proxy-round"},{"type":"field","ip":["50.7.87.2","50.7.87.3","50.7.87.4","50.7.87.5","75.2.60.5","144.76.1.88","104.21.33.34","188.114.98.0","188.114.99.0","3.162.247.34","3.162.247.38","3.162.247.45","3.162.247.77","3.33.186.135","63.176.8.218","85.10.207.48","94.130.33.41","95.216.69.37","104.21.63.202","15.197.167.90","172.67.150.14","204.12.196.34","35.157.26.135","52.222.214.38","52.222.214.99","54.232.119.62","65.109.34.234","94.130.70.160","138.201.54.122","142.54.178.211","172.67.158.128","184.171.110.10","52.222.214.108","52.222.214.124","63.141.252.203"],"balancerTag":"proxy-round"},{"balancerTag":"proxy-round","network":"tcp,udp","type":"field"}]}}`;
-const CONFIG_TEMPLATE = JSON.parse(CONFIG_TEMPLATE_STR);
+/* ══ EMBEDDED CONFIG TEMPLATE (PERFECT FORMATTING) ══ */
+const CONFIG_TEMPLATE_STR = `{
+  "_comment": "AmyraxVPN Ultimate — Final No-Error Optimized Config",
+  "remarks": "__REMARKS__",
+  "log": {
+    "loglevel": "warning",
+    "access": "none"
+  },
+  "dns": {
+    "hosts": {
+      "domain:googleapis.cn": "googleapis.com"
+    },
+    "servers": [
+      {
+        "address": "https://dns.google/dns-query",
+        "domains": ["geosite:google", "geosite:geolocation-!cn"],
+        "expectIPs": ["geoip:!cn"],
+        "queryStrategy": "UseIPv4",
+        "cacheSize": 1024
+      },
+      {
+        "address": "223.5.5.5",
+        "domains": ["geosite:private", "geosite:cn"],
+        "expectIPs": ["geoip:cn", "geoip:private"],
+        "skipFallback": true,
+        "tag": "domestic-dns",
+        "cacheSize": 512
+      },
+      "https://cloudflare-dns.com/dns-query",
+      "1.1.1.1"
+    ],
+    "tag": "dns-module",
+    "queryStrategy": "UseIPv4",
+    "disableFallback": false,
+    "disableFallbackIfMatch": true,
+    "cacheCapacity": 2048
+  },
+  "inbounds": [
+    {
+      "tag": "socks-in",
+      "listen": "127.0.0.1",
+      "port": 10808,
+      "protocol": "socks",
+      "settings": { "auth": "noauth", "udp": true, "userLevel": 8 },
+      "sniffing": { "enabled": true, "destOverride": ["http", "tls", "quic"], "routeOnly": true }
+    },
+    {
+      "tag": "http-in",
+      "listen": "127.0.0.1",
+      "port": 10809,
+      "protocol": "http",
+      "settings": { "userLevel": 8 },
+      "sniffing": { "enabled": true, "destOverride": ["http", "tls"], "routeOnly": true }
+    }
+  ],
+  "observatory": {
+    "enableConcurrency": true,
+    "probeInterval": "30s",
+    "probeUrl": "https://www.gstatic.com/generate_204",
+    "subjectSelector": ["AmyraxVPN-", "IP-"],
+    "observerDelay": "1s",
+    "checkInterval": "5s",
+    "healthCheck": true,
+    "healthyThreshold": 2
+  },
+  "outbounds": [
+    {
+      "tag": "AmyraxVPN-01",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "138.201.54.122",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "v1-34.docs.kubernetes.io",
+          "allowInsecure": false,
+          "alpn": ["h2", "http/1.1"],
+          "fingerprint": "chrome",
+          "show": false
+        },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1",
+            "xPaddingObfsMode": true,
+            "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" },
+            "xPaddingKey": "__PAD_KEY__",
+            "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048,
+            "scMinPostsIntervalMs": 0,
+            "scStreamReceiveWindow": 33554432,
+            "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true,
+          "tcpKeepAlive": true,
+          "tcpKeepAliveIdle": 15,
+          "tcpKeepAliveInterval": 5,
+          "bufferSize": 32768,
+          "mark": 0
+        }
+      },
+      "mux": { "enabled": false, "concurrency": -1 }
+    },
+    {
+      "tag": "AmyraxVPN-02",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "142.54.178.211",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-03",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "142.54.178.211",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-04",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "204.12.196.34",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "get.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-05",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "204.12.196.34",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-06",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.5.83",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cs.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-07",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.5.83",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-08",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.5.83",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-09",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.87.5",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-10",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "63.141.252.203",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cs.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-11",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "63.141.252.203",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-12",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "63.141.252.203",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-13",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "65.109.34.234",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "get.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-14",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.13.19",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-15",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.13.19",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "get.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-16",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.13.19",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-17",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.70.160",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cs.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-18",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.70.160",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "discuss.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "AmyraxVPN-19",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.70.160",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "get.kubernetes.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-001",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.5.83",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-002",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.87.2",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "kind.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-003",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.87.3",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cluster-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-004",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.87.4",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "gateway-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-005",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "50.7.87.5",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "krew.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-017",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "85.10.207.48",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cluster-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-018",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.33.41",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "gateway-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-019",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "95.216.69.37",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "krew.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-022",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "15.197.167.90",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-024",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "204.12.196.34",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cluster-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-029",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "65.109.34.234",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "jobset.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-030",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "94.130.70.160",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "kind.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-031",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "138.201.54.122",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "cluster-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-032",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "142.54.178.211",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "gateway-api.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "IP-037",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [{
+          "address": "63.141.252.203",
+          "port": __PORT__,
+          "users": [{ "id": "__UUID__", "encryption": "none", "flow": "", "level": 8 }]
+        }]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": { "serverName": "kind.sigs.k8s.io", "allowInsecure": false, "alpn": ["h2", "http/1.1"], "fingerprint": "chrome" },
+        "xhttpSettings": {
+          "host": "__HOST__",
+          "path": "__PATH__",
+          "mode": "auto",
+          "extra": {
+            "xPaddingBytes": "1-1", "xPaddingObfsMode": true, "scMaxEachPostBytes": "32000000",
+            "headers": { "x-host": "__SERVER_ADDR__" }, "xPaddingKey": "__PAD_KEY__", "xPaddingHeader": "__PAD_HEADER__",
+            "scMaxConcurrentPosts": 2048, "scMinPostsIntervalMs": 0, "scStreamReceiveWindow": 33554432, "scInitialRequestTimeout": "5000"
+          }
+        },
+        "sockopt": { "tcpFastOpen": true, "tcpNoDelay": true, "tcpKeepAlive": true, "tcpKeepAliveIdle": 15, "tcpKeepAliveInterval": 5, "bufferSize": 32768, "mark": 0 }
+      },
+      "mux": { "enabled": false }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": { "domainStrategy": "UseIPv4" }
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": { "response": { "type": "http" } }
+    },
+    {
+      "tag": "dns-out",
+      "protocol": "dns"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "domainMatcher": "mph",
+    "balancers": [
+      {
+        "tag": "proxy-round",
+        "selector": ["AmyraxVPN-", "IP-"],
+        "strategy": { "type": "leastPing" }
+      }
+    ],
+    "rules": [
+      { "type": "field", "ip": ["geoip:private"], "outboundTag": "direct" },
+      { "type": "field", "domain": ["geosite:private"], "outboundTag": "direct" },
+      { "type": "field", "ip": ["geoip:cn"], "outboundTag": "direct" },
+      { "type": "field", "domain": ["geosite:cn", "geosite:google"], "balancerTag": "proxy-round" },
+      { "type": "field", "domain": ["domain:kubernetes.io", "domain:sigs.k8s.io", "domain:helm.sh", "domain:istio.io", "domain:letsencrypt.org"], "balancerTag": "proxy-round" },
+      { "type": "field", "network": "tcp,udp", "balancerTag": "proxy-round" }
+    ]
+  }
+}`;
+
+const CONFIG_TEMPLATE = JSON.parse(CONFIG_TEMPLATE_STR.replace(/__PORT__/g, "443").replace(/__\w+__/g, "dummy"));
 
 /* ══ CONSTANTS ══ */
 const DONATED = {
@@ -456,7 +1512,6 @@ function setMode(m) {
   document.getElementById('donated-info').classList.toggle('show', m === 'donated');
   document.getElementById('custom-fields').style.display = m === 'custom' ? 'block' : 'none';
   updateSingleUuidVisibility();
-  // re-render uuid entries so UUID col shows/hides correctly per mode
   if (multiUuidEnabled && uuidEntries.length > 0) rerenderAllUuidEntries();
 }
 
@@ -530,7 +1585,6 @@ function renderUuidEntry(entry) {
   requestAnimationFrame(()=>{
     div.style.transition='all .3s ease'; div.style.opacity='1'; div.style.transform='translateY(0)';
   });
-  // focus: name field in donated mode, uuid field in custom mode
   const focusEl = div.querySelector(isDonated ? '.name-input' : '.uuid-input');
   setTimeout(()=>focusEl?.focus(), 100);
 }
@@ -592,36 +1646,23 @@ function updateCountBadge() {
   document.getElementById('uuidCountBadge').textContent = `${sel} انتخاب‌شده از ${uuidEntries.length}`;
 }
 
-/* ══ FILL TEMPLATE ══ */
+/* ══ STRING FORMATTING CORE (Preserves Inline Styles) ══ */
+function getFormattedJSON(uuid, host, path, serverAddr, paddingKey, paddingHeader, port, name) {
+  return CONFIG_TEMPLATE_STR
+    .replace(/__REMARKS__/g, name)
+    .replace(/__UUID__/g, uuid)
+    .replace(/__HOST__/g, host)
+    .replace(/__PATH__/g, path)
+    .replace(/__SERVER_ADDR__/g, serverAddr)
+    .replace(/__PAD_KEY__/g, paddingKey)
+    .replace(/__PAD_HEADER__/g, paddingHeader)
+    .replace(/__PORT__/g, parseInt(port) || 443);
+}
+
+/* ══ FILL TEMPLATE (For building URI objects) ══ */
 function fillTemplate(uuid, host, path, serverAddr, paddingKey, paddingHeader, port, name) {
-  const cfg = JSON.parse(JSON.stringify(CONFIG_TEMPLATE)); // deep clone
-  cfg.remarks = name;
-
-  cfg.outbounds.forEach(ob => {
-    const vnext = ob.settings?.vnext;
-    if (vnext) {
-      vnext.forEach(v => {
-        v.port = parseInt(port) || 443;
-        v.users?.forEach(u => {
-          if (u.id === 'XXXXXXXXXXX') u.id = uuid;
-        });
-      });
-    }
-
-    const xhttp = ob.streamSettings?.xhttpSettings;
-    if (!xhttp) return;
-
-    if (xhttp.host === 'XXXXXXXXXXX') xhttp.host = host;
-    if (xhttp.path === 'XXXXXXXXXXX') xhttp.path = path;
-
-    const extra = xhttp.extra;
-    if (!extra) return;
-    if (extra.headers?.['x-host'] === 'XXXXXXXXXXX') extra.headers['x-host'] = serverAddr;
-    if (extra.xPaddingKey === 'XXXXXXXXXXX') extra.xPaddingKey = paddingKey;
-    if (extra.xPaddingHeader === 'XXXXXXXXXXX') extra.xPaddingHeader = paddingHeader;
-  });
-
-  return cfg;
+  const jsonStr = getFormattedJSON(uuid, host, path, serverAddr, paddingKey, paddingHeader, port, name);
+  return JSON.parse(jsonStr);
 }
 
 /* ══ BUILD TXT (vless:// URIs) ══ */
@@ -656,8 +1697,7 @@ function buildTXT(uuid, host, path, serverAddr, paddingKey, paddingHeader, port,
 async function generate() {
   const host = document.getElementById('cfgHost').value.trim().replace(/^https?:\/\//,'');
   const baseName = document.getElementById('cfgName').value.trim() || 'AmyraxVPN';
-  const port = parseInt(document.getElementById('cfgPort').value) || 443;
-
+  const port = 443;
   let uuid, path, serverAddr, paddingKey, paddingHeader;
 
   if (currentMode === 'donated') {
@@ -682,7 +1722,6 @@ async function generate() {
   let uuidList = [];
   if (multiUuidEnabled) {
     const isDonatedMode = currentMode === 'donated';
-    // donated: only require selection; custom: also require uuid filled
     const selected = isDonatedMode
       ? uuidEntries.filter(e => e.selected)
       : uuidEntries.filter(e => e.selected && e.uuid.trim());
@@ -713,8 +1752,7 @@ async function generate() {
   const proxyCount = CONFIG_TEMPLATE.outbounds.filter(o => o.protocol === 'vless').length;
 
   uuidList.forEach(({uuid: u, name: n, host: h}) => {
-    const cfg = fillTemplate(u, h, path, serverAddr, paddingKey, paddingHeader, port, n);
-    const json = JSON.stringify(cfg, null, 2);
+    const json = getFormattedJSON(u, h, path, serverAddr, paddingKey, paddingHeader, port, n);
     const txt = buildTXT(u, h, path, serverAddr, paddingKey, paddingHeader, port, n);
     generatedConfigs.push({name: n, host: h, json, txt, proxyCount});
   });
@@ -732,7 +1770,6 @@ async function generate() {
         <div class="result-title">🛡️ <span>${escHtml(cfg.name)}</span></div>
         <div class="result-meta">
           <span class="meta-tag">🌐 ${escHtml(cfg.host)}</span>
-          <span class="meta-tag">🔌 :${port}</span>
           <span class="meta-tag">📡 ${cfg.proxyCount} Nodes</span>
           <span class="meta-tag">⚖️ LeastPing Balancer</span>
           <span class="meta-tag">${currentMode==='donated'?'🇫🇷 Donated':'⚙️ Custom'}</span>
@@ -837,7 +1874,7 @@ async function animProg(steps) {
 }
 
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')generate();});
-['cfgHost','cfgName','cfgUuid','cfgPath','cfgServerAddr','cfgPaddingKey','cfgPaddingHeader','cfgPort'].forEach(id=>{
+['cfgHost','cfgName','cfgUuid','cfgPath','cfgServerAddr','cfgPaddingKey','cfgPaddingHeader'].forEach(id=>{
   document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
 });
 </script>
