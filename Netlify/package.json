@@ -1,11 +1,9 @@
 {
-  "name": "my-custom-edge-worker",
-  "version": "1.0.4",
-  "description": "A private edge function for handling requests",
+  "name": "amyraxvpn-relay",
+  "version": "3.0.4",
   "private": true,
-  "license": "MIT",
   "scripts": {
-    "build": "echo 'Ready'",
+    "build": "echo 'No build step required'",
     "dev": "netlify dev"
   },
   "devDependencies": {
