@@ -1,9 +1,7 @@
-# Configuration for Custom Proxy
+[build]
+  command   = "npm run build"
+  publish   = "public"
 
 [[edge_functions]]
-  path = "/*"
   function = "relay"
-
-[build]
-  publish = "public"
-  command = "npm run build"
+  path     = "/*"
