@@ -1,119 +1,87 @@
-const HOP_BY_HOP = new Set([
-  "host",
-  "connection",
-  "keep-alive",
-  "proxy-authenticate",
-  "proxy-authorization",
-  "te",
-  "trailer",
-  "transfer-encoding",
-  "upgrade",
-  "forwarded",
-  "x-forwarded-host",
-  "x-forwarded-proto",
-  "x-forwarded-port",
+const EXCLUDED_HEADERS = new Set([
+  "host", "connection", "keep-alive", "proxy-authenticate",
+  "proxy-authorization", "te", "trailer", "transfer-encoding",
+  "upgrade", "forwarded", "x-forwarded-host", "x-forwarded-proto",
+  "x-forwarded-port", "x-host", "cf-connecting-ip", "cf-ray"
 ]);
 
-const NETLIFY_PREFIX = ["x-nf-", "x-netlify-"];
+const FALLBACK_SITE = "https://amyraxvpn-main.github.io/AmyraxVPN-RELAY/";
 
-const NO_BODY = new Set(["GET", "HEAD"]);
-
-const FALLBACK_URL = "https://amyraxvpn-main.github.io/AmyraxVPN-RELAY/";
-
-function buildTargetUrl(xHost, pathname, search) {
-  if (xHost.startsWith("http://") || xHost.startsWith("https://")) {
-    return xHost + pathname + search;
-  }
-  const useHttps =
-    !xHost.includes(":") ||
-    xHost.includes(":443") ||
-    /^s\d+\./.test(xHost);
-  return (useHttps ? "https://" : "http://") + xHost + pathname + search;
-}
-
-function buildUpstreamHeaders(incoming) {
-  const out = new Headers();
-  let clientIp = null;
-
-  for (const [name, value] of incoming) {
-    const lower = name.toLowerCase();
-
-    if (HOP_BY_HOP.has(lower)) continue;
-    if (NETLIFY_PREFIX.some((p) => lower.startsWith(p))) continue;
-    if (lower === "x-host") continue;
-
-    if (lower === "x-real-ip") {
-      clientIp = value;
-      continue;
-    }
-    if (lower === "x-forwarded-for") {
-      if (!clientIp) clientIp = value;
-      continue;
-    }
-
-    out.set(lower, value);
-  }
-
-  if (clientIp) out.set("x-forwarded-for", clientIp);
-  return out;
-}
-
-function buildDownstreamHeaders(upstream) {
-  const out = new Headers();
-  for (const [name, value] of upstream.headers) {
-    if (name.toLowerCase() === "transfer-encoding") continue;
-    out.set(name, value);
-  }
-  return out;
-}
-
-export default async function relay(request, _context) {
+export default async function edgeRouter(request) {
   try {
-    const url = new URL(request.url);
-    const xHost = request.headers.get("x-host");
+    const requestUrl = new URL(request.url);
+    const targetHost = request.headers.get("x-host");
 
-    if (url.pathname === "/" && !xHost) {
-      const isWebSocket =
-        (request.headers.get("upgrade") ?? "").toLowerCase() === "websocket";
-
-      if (!isWebSocket) {
-        const page = await fetch(FALLBACK_URL);
-        const html = await page.text();
-        return new Response(html, {
-          headers: { "content-type": "text/html; charset=UTF-8" },
-        });
+    if (!targetHost) {
+      if (requestUrl.pathname === "/") {
+        const isWebSocket = (request.headers.get("upgrade") || "").toLowerCase() === "websocket";
+        if (!isWebSocket) {
+          return fetch(FALLBACK_SITE);
+        }
       }
+      return new Response("Not Found", { status: 404 });
     }
 
-    if (!xHost) {
-      return new Response("Bad Request: x-host header is required.", {
-        status: 400,
-      });
+    let protocol = "https://";
+    let cleanHost = targetHost;
+
+    if (targetHost.startsWith("http://")) {
+      protocol = "http://";
+      cleanHost = targetHost.replace("http://", "");
+    } else if (targetHost.startsWith("https://")) {
+      cleanHost = targetHost.replace("https://", "");
+    } else if (targetHost.includes(":") && !targetHost.includes(":443") && !/^s\d+\./.test(targetHost)) {
+      protocol = "http://";
+    }
+    
+    const finalTarget = new URL(requestUrl.pathname + requestUrl.search, protocol + cleanHost);
+
+    const proxyHeaders = new Headers();
+    let clientIp = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip");
+
+    for (const [key, value] of request.headers.entries()) {
+      const lowerKey = key.toLowerCase();
+      
+      if (EXCLUDED_HEADERS.has(lowerKey)) continue;
+      if (lowerKey.startsWith("x-nf-") || lowerKey.startsWith("x-netlify-")) continue;
+      
+      proxyHeaders.set(key, value);
     }
 
-    const targetUrl = buildTargetUrl(xHost, url.pathname, url.search);
-    const outHeaders = buildUpstreamHeaders(request.headers);
-    const method = request.method;
+    if (clientIp) proxyHeaders.set("x-forwarded-for", clientIp);
 
-    let body = null;
-    if (!NO_BODY.has(method) && request.body) {
-      body = await request.arrayBuffer();
-    }
+    const reqMethod = request.method;
+    const isBodyAllowed = reqMethod !== "GET" && reqMethod !== "HEAD";
+    const hasStream = isBodyAllowed && request.body !== null;
 
-    const upstream = await fetch(targetUrl, {
-      method,
-      headers: outHeaders,
+    const fetchOptions = {
+      method: reqMethod,
+      headers: proxyHeaders,
       redirect: "manual",
-      body,
+    };
+
+    if (hasStream) {
+      fetchOptions.body = request.body;
+      fetchOptions.duplex = "half";
+    }
+
+    const upstreamRes = await fetch(finalTarget.toString(), fetchOptions);
+
+    const finalHeaders = new Headers(upstreamRes.headers);
+    finalHeaders.delete("transfer-encoding");
+    finalHeaders.delete("content-encoding");
+
+    return new Response(upstreamRes.body, {
+      status: upstreamRes.status,
+      statusText: upstreamRes.statusText,
+      headers: finalHeaders,
     });
 
-    return new Response(upstream.body, {
-      status: upstream.status,
-      headers: buildDownstreamHeaders(upstream),
-    });
-
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : "unknown error";
-    return new Response(`Bad Gateway: ${msg}`, { status: 502 });
+  } catch (error) {
+    return new Response("Edge Runtime Error", { status: 500 });
   }
 }
+
+export const config = {
+  path: "/*"
+};
